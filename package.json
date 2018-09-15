@@ -1,0 +1,38 @@
+{
+  "name": "@mixint/pathwrite",
+  "version": "1.0.0",
+  "description": "A Transflect stream to stream incoming files to disk and respond with file stats on success.",
+  "main": "PathWrite.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mixint/pathwrite.git"
+  },
+  "keywords": [
+    "mime",
+    "stream",
+    "streaming",
+    "filesystem",
+    "fs",
+    "stat",
+    "PUT",
+    "201",
+    "Created"
+  ],
+  "author": "Colten Jackson",
+  "license": "SEE LICENSE IN CONTINUITY.LICENSE",
+  "bugs": {
+    "url": "https://github.com/mixint/pathwrite/issues"
+  },
+  "homepage": "https://github.com/mixint/pathwrite#readme",
+  "dependencies": {
+    "parsedmessage": "^0.2.0",
+    "serverfailsoft": "^1.1.1"
+  },
+  "devDependencies": {}
+}
