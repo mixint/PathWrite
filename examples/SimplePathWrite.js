@@ -10,6 +10,6 @@ http.createServer({
     if(req.method == 'PUT'){
         req.pipe(new PathWrite).pipe(res)
     } else {
-        fs.createReadStream(decodeURI(req.pathname)).pipe(res)
+        fs.createReadStream(req.pathname).pipe(res)
     }
 }).listen(3000)

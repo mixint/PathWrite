@@ -1,6 +1,6 @@
-let Transflect = require('@mixint/transflect')
-let mimemap    = require('@mixint/mimemap')
-let fs         = require('fs')
+const Transflect = require('@mixint/transflect')
+const extrastat  = require('@mixint/extrastat')
+const fs         = require('fs')
 
 /**
  * @author Colten Jackson
@@ -8,22 +8,19 @@ let fs         = require('fs')
  * PathWrite creates or overwrites a specified file
  */
 module.exports = class PathWrite extends Transflect {
-    constructor(){
-        super()
-    }
+
+    constructor(opt){ super(opt) }
 
     /**
-     * @private
      * @param {ParsedMessage} source
+     * @returns {WriteStream}
      * Sets a destination for the new (over overwritten) file
      */
     _open(source){
-        return this.dest = fs.createWriteStream(decodeURI(source.pathname))
+        return this.dest = fs.createWriteStream(source.pathname)
     }
 
     /**
-     * @private
-     * @callback done
      * Writes an incoming binary chunk to the destination,
      * and signals that its ready for the next chunk immediately
      * or, if write returned false, after waiting for the drain event
@@ -33,11 +30,8 @@ module.exports = class PathWrite extends Transflect {
     }
 
     /**
-     * @private
-     * @callback done
      * After all incoming bytes are written to disk via _transform, _flush is called
      * _flush implicitely fires 'end' event, closing the destination file.
-     *
      */
     _flush(done){
         mimemap.extraStat(this.dest.path, (err, stat) => {
