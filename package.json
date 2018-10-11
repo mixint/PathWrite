@@ -1,6 +1,6 @@
 {
   "name": "@mixint/pathwrite",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Transflect stream to stream incoming files to disk and respond with file stats on success.",
   "main": "PathWrite.js",
   "directories": {
