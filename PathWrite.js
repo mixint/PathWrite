@@ -1,5 +1,5 @@
 const Transflect = require('@mixint/transflect')
-const extrastat  = require('@mixint/extrastat')
+const extraStat  = require('@mixint/extrastat')
 const fs         = require('fs')
 
 /**
@@ -17,6 +17,7 @@ module.exports = class PathWrite extends Transflect {
      * Sets a destination for the new (over overwritten) file
      */
     _open(source){
+        console.log(source.pathname)
         return this.dest = fs.createWriteStream(source.pathname)
     }
 
@@ -34,7 +35,7 @@ module.exports = class PathWrite extends Transflect {
      * _flush implicitely fires 'end' event, closing the destination file.
      */
     _flush(done){
-        mimemap.extraStat(this.dest.path, (err, stat) => {
+        extraStat(this.dest.path, (err, stat) => {
             if(err) return done(err)
             this.writeHead(201, {
                 'Content-Length': stat.filestat.size,
