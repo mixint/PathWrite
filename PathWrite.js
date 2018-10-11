@@ -17,7 +17,6 @@ module.exports = class PathWrite extends Transflect {
      * Sets a destination for the new (over overwritten) file
      */
     _open(source){
-        console.log(source.pathname)
         return this.dest = fs.createWriteStream(source.pathname)
     }
 
