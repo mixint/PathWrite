@@ -31,10 +31,10 @@
   },
   "homepage": "https://github.com/mixint/pathwrite#readme",
   "dependencies": {
-    "@mixint/extrastat": "^1.0.0",
-    "@mixint/transflect": "^0.4.0",
-    "parsedmessage": "^3.0.1",
-    "serverfailsoft": "^1.2.3"
+    "@mixint/extrastat": "1.0.0",
+    "@mixint/transflect": "0.6.1",
+    "parsedmessage": "3.0.1",
+    "serverfailsoft": "2.0.2"
   },
   "devDependencies": {}
 }
