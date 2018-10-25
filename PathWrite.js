@@ -14,7 +14,7 @@ module.exports = class PathWrite extends Transflect {
     /**
      * @param {ParsedMessage} source
      * @returns {WriteStream}
-     * Sets a destination for the new (over overwritten) file
+     * Sets a destination for the new (or overwritten) file
      */
     _open(source){
         return this.dest = fs.createWriteStream(source.pathname)
@@ -25,18 +25,17 @@ module.exports = class PathWrite extends Transflect {
      * and signals that its ready for the next chunk immediately
      * or, if write returned false, after waiting for the drain event
      */
-    _transform(chunk, encoding, done){
-        this.dest.write(chunk) && done() || this.dest.once('drain', done)
+    _transflect(data, done){
+        this.dest.write(data) && done() || this.dest.once('drain', done)
     }
 
     /**
-     * After all incoming bytes are written to disk via _transform, _flush is called
-     * _flush implicitely fires 'end' event, closing the destination file.
+     * _end is called by _flush, which emits 'end', which calls _destroy, which closes underlying resources
      */
-    _flush(done){
+    _end(done){
         extraStat(this.dest.path, (err, stat) => {
             if(err) return done(err)
-            this.writeHead(201, {
+            this.pipes.writeHead(201, {
                 'Content-Length': stat.filestat.size,
                 'Content-Type'  : stat.mimetype,
                 'x-Content-Mode': stat.filemode,
